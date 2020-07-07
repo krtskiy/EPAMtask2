@@ -1,10 +1,8 @@
 package com.epam.rd.java.basic.practice2;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class ArrayImpl implements Array {
-    private Object[] objArray;
 
 	@Override
     public void clear() {
@@ -37,40 +35,32 @@ public class ArrayImpl implements Array {
 	
 	@Override
     public void add(Object element) {
-        add(element);
+        
     }
 
 	@Override
     public void set(int index, Object element) {
-        objArray[index] = element;
+        
     }
 
 	@Override
     public Object get(int index) {
-        return objArray[index];
+        return null;
     }
 
 	@Override
     public int indexOf(Object element) {
-
         return 0;
     }
 
 	@Override
     public void remove(int index) {
-        Object[] anotherObjArray = new Object[objArray.length - 1];
-        for (int i = 0, k = 0; i < objArray.length; i++) {
-            if (i == index) {
-                continue;
-            } else {
-                anotherObjArray[k++] = objArray[i];
-            }
-        }
+        
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(objArray);
+        return null;
     }
 
     public static void main(String[] args) {
