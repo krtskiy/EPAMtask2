@@ -5,22 +5,26 @@ import java.util.Iterator;
 public class ArrayImpl implements Array {
     private Object[] objArray;
 
-	@Override
-    public void clear() {
-        
+    public ArrayImpl(int arrLength) {
+        objArray = new Object[arrLength];
     }
 
-	@Override
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
     public int size() {
         return 0;
     }
-	
-	@Override
+
+    @Override
     public Iterator<Object> iterator() {
-	    return new IteratorImpl();
+        return new IteratorImpl();
     }
-	
-	private class IteratorImpl implements Iterator<Object> {
+
+    private class IteratorImpl implements Iterator<Object> {
 
         @Override
         public boolean hasNext() {
@@ -33,29 +37,29 @@ public class ArrayImpl implements Array {
         }
 
     }
-	
-	@Override
+
+    @Override
     public void add(Object element) {
-        add(element);
+
     }
 
-	@Override
+    @Override
     public void set(int index, Object element) {
         objArray[index] = element;
     }
 
-	@Override
+    @Override
     public Object get(int index) {
         return objArray[index];
     }
 
-	@Override
+    @Override
     public int indexOf(Object element) {
 
         return 0;
     }
 
-	@Override
+    @Override
     public void remove(int index) {
         Object[] anotherObjArray = new Object[objArray.length - 1];
         for (int i = 0, k = 0; i < objArray.length; i++) {
@@ -69,7 +73,7 @@ public class ArrayImpl implements Array {
 
     @Override
     public String toString() {
-	    StringBuilder str = new StringBuilder("[");
+        StringBuilder str = new StringBuilder("[");
         for (int i = 0; i < objArray.length; i++) {
             if (i < objArray.length) {
                 str.append(objArray[i]);
