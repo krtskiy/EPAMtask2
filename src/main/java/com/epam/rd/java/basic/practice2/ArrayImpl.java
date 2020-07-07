@@ -1,5 +1,6 @@
 package com.epam.rd.java.basic.practice2;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class ArrayImpl implements Array {
@@ -69,15 +70,7 @@ public class ArrayImpl implements Array {
 
     @Override
     public String toString() {
-	    StringBuilder str = new StringBuilder("[");
-        for (int i = 0; i < objArray.length; i++) {
-            if (i < objArray.length) {
-                str.append(objArray[i]);
-            } else {
-                str.append(objArray[i] + "]");
-            }
-        }
-        return null;
+        return Arrays.toString(objArray);
     }
 
     public static void main(String[] args) {
