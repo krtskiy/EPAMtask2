@@ -4,8 +4,7 @@ import java.util.Iterator;
 
 public class ArrayImpl implements Array {
     private Object[] array;
-    private int size;
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 20;
     private static final Object[] EMPTY_ARRAY = {};
 
     public ArrayImpl(int capacity) {
@@ -16,25 +15,22 @@ public class ArrayImpl implements Array {
         } else {
             throw new IllegalArgumentException("Illegal capacity: " + capacity);
         }
-        size = this.array.length;
     }
 
     public ArrayImpl() {
         this.array = new Object[DEFAULT_CAPACITY];
-        size = this.array.length;
     }
 
     @Override
     public void clear() {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < array.length; i++) {
             array[i] = null;
         }
-        size = 0;
     }
 
     @Override
     public int size() {
-        return size;
+        return array.length;
     }
 
     @Override
@@ -47,7 +43,7 @@ public class ArrayImpl implements Array {
 
         @Override
         public boolean hasNext() {
-            return cursor != size;
+            return cursor != array.length;
         }
 
         @Override
@@ -59,13 +55,12 @@ public class ArrayImpl implements Array {
 
     @Override
     public void add(Object element) {
-        Object[] addArray = new Object[size+1];
-        for (int i = 0, k = 0; i < size; i++, k++) {
-            if (k < size) {
-                addArray[k] = array[i];
-            }
+        Object[] addArray = new Object[array.length+1];
+        for (int i = 0; i < array.length; i++) {
+                addArray[i] = array[i];
         }
-        addArray[size+1] = element;
+        addArray[addArray.length-1] = element;
+        array = addArray;
     }
 
     @Override
@@ -81,13 +76,13 @@ public class ArrayImpl implements Array {
     @Override
     public int indexOf(Object element) {
         if (element == null) {
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < array.length; i++) {
                 if (array[i] == null) {
                     return i;
                 }
             }
         } else {
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < array.length; i++) {
                 if (element.equals(array[i])) {
                     return i;
                 }
@@ -99,7 +94,7 @@ public class ArrayImpl implements Array {
     @Override
     public void remove(int index) {
         Object[] anotherArray = new Object[array.length - 1];
-        for (int i = 0, k = 0; i < size; i++) {
+        for (int i = 0, k = 0; i < array.length; i++) {
             if (i == index) {
                 continue;
             } else {
@@ -122,7 +117,8 @@ public class ArrayImpl implements Array {
     }
 
     public static void main(String[] args) {
-
+        ArrayImpl array = new ArrayImpl(4);
+        array.add('A');
     }
 
 }
