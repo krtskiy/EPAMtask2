@@ -117,8 +117,7 @@ public class ArrayImpl implements Array {
     }
 
     public static void main(String[] args) {
-        ArrayImpl array = new ArrayImpl(4);
-        array.add('A');
+        
     }
 
 }
