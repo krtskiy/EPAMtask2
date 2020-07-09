@@ -1,18 +1,19 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayImpl implements Array {
     private Object[] array;
     private int nElements = 0;
-    private int DEFAULT_CAPACITY = 20;
+    private int default_capacity = 10;
 
     public ArrayImpl(int capacity) {
         this.array = new Object[capacity];
     }
 
     public ArrayImpl() {
-        this.array = new Object[DEFAULT_CAPACITY];
+        this.array = new Object[default_capacity];
     }
 
     @Override
@@ -36,16 +37,14 @@ public class ArrayImpl implements Array {
 
         @Override
         public boolean hasNext() {
-//            if (cursor > nElements - 1) {
-//                return false;
-//            } else {
-//                return array[cursor] != null;
-//            }
             return cursor != nElements;
         }
 
         @Override
         public Object next() {
+            if (cursor > nElements) {
+                throw new NoSuchElementException();
+            }
             if (!hasNext()) {
                 return null;
             } else {
@@ -132,15 +131,12 @@ public class ArrayImpl implements Array {
         return str.toString();
     }
 
-    public static void print(Object objToPrint) {
-        System.out.println(objToPrint);
-    }
-
+    @SuppressWarnings("all")
     public static void main(String[] args) {
         ArrayImpl arr = new ArrayImpl(5);
         arr.add("A");
         arr.add("B");
-        print(arr);
+        Demo.print(arr);
 
     }
 
