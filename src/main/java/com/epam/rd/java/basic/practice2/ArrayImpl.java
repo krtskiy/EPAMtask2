@@ -4,14 +4,9 @@ import java.util.Iterator;
 
 public class ArrayImpl implements Array {
     private Object[] array;
-    private int DEFAULT_CAPACITY = 20;
 
-    public ArrayImpl(int capacity) {
-        this.array = new Object[capacity];
-    }
-
-    public ArrayImpl() {
-        this.array = new Object[DEFAULT_CAPACITY];
+    public ArrayImpl(int index) {
+        this.array = new Object[index];
     }
 
     @Override
@@ -30,32 +25,29 @@ public class ArrayImpl implements Array {
     }
 
     private class IteratorImpl implements Iterator<Object> {
-        int cursor;
+        private int currentIndex;
 
         @Override
         public boolean hasNext() {
-            if (cursor > array.length - 1) {
+            if (currentIndex > array.length - 1) {
                 return false;
-            } else {
-                return array[cursor] != null;
             }
+            return array[currentIndex] != null;
         }
 
         @Override
         public Object next() {
             if (!hasNext()) {
                 return null;
-            } else {
-                return array[cursor++];
             }
+            return array[currentIndex++];
         }
 
         @Override
         public void remove() {
-            ArrayImpl.this.remove(cursor - 1);
-            cursor = 0;
+            ArrayImpl.this.remove(currentIndex - 1);
+            currentIndex = 0;
         }
-
     }
 
     @Override
@@ -80,61 +72,100 @@ public class ArrayImpl implements Array {
 
     @Override
     public int indexOf(Object element) {
-        if (element == null) {
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] == null) {
-                    return i;
-                }
-            }
-        } else {
-            for (int i = 0; i < array.length; i++) {
-                if (element.equals(array[i])) {
-                    return i;
-                }
+        int index = -1;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == element) {
+                index = i;
+                break;
             }
         }
-        return -1;
+        return index;
     }
 
     @Override
     public void remove(int index) {
         Object[] temp = new Object[array.length - 1];
-        for (int i = 0, k = 0; i < array.length; i++) {
-            if (i == index) {
+        int currentArrayIndex = 0;
+        int currentTempIndex = 0;
+
+        array[index] = null;
+
+        for (Object o : array) {
+            if (o == null) {
+                currentArrayIndex++;
                 continue;
-            } else {
-                temp[k++] = array[i];
             }
+            temp[currentTempIndex] = array[currentArrayIndex];
+            currentArrayIndex++;
+            currentTempIndex++;
         }
+
         array = temp;
     }
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("[");
+        StringBuilder result = new StringBuilder("[");
         if (array.length != 0) {
-            for (int i = 0; i < array.length; i++) {
-                if (i < array.length - 1) {
-                    str.append(array[i]).append(", ");
-                } else {
-                    str.append(array[array.length - 1]).append("]");
-                }
+            for (Object o : array) {
+                result.append(o).append(", ");
             }
-        } else {
-            str.append(" ]");
+            result.deleteCharAt(result.length() - 1).deleteCharAt(result.length() - 1);
         }
-        return str.toString();
+        result.append("]");
+        return result.toString();
     }
 
-    public static void print(Object objToPrint) {
-        System.out.println(objToPrint);
+    public static void print(Object string) {
+        System.out.println(string);
     }
 
     public static void main(String[] args) {
-        ArrayImpl arr = new ArrayImpl(0);
-        arr.add("A");
-        arr.add("B");
-        print(arr);
+        ArrayImpl array = new ArrayImpl(0);
+
+        array.add("A");
+        array.add("B");
+        array.add("C");
+        print(array);
+
+        array.set(1, "D");
+        print(array);
+
+        print(array.get(2));
+
+        print(array.indexOf("A"));
+
+        array.remove(1);
+        print(array);
+
+        array.clear();
+        print(array);
+
+        array.add("A");
+        array.add("B");
+        array.add("C");
+        print(array);
+
+        print(array.size());
+
+
+        Iterator it = array.iterator();
+
+        print(it.hasNext());
+        print(it.next());
+        it.remove();
+        print(array);
+
+        print(it.hasNext());
+        print(it.next());
+        it.remove();
+        print(array);
+
+        print(it.hasNext());
+        print(it.next());
+        it.remove();
+        print(array);
     }
 
 }
