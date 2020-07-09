@@ -5,8 +5,8 @@ import java.util.Iterator;
 public class ArrayImpl implements Array {
     private Object[] array;
     private int size;
+    private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] EMPTY_ARRAY = {};
-    private static final Object[] DEFAULT_CAPACITY_EMPTY_ARRAY = {};
 
     public ArrayImpl(int capacity) {
         if (capacity > 0) {
@@ -20,7 +20,7 @@ public class ArrayImpl implements Array {
     }
 
     public ArrayImpl() {
-        this.array = DEFAULT_CAPACITY_EMPTY_ARRAY;
+        this.array = new Object[DEFAULT_CAPACITY];
         size = this.array.length;
     }
 
