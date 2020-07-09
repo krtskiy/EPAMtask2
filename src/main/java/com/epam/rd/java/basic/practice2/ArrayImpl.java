@@ -4,17 +4,10 @@ import java.util.Iterator;
 
 public class ArrayImpl implements Array {
     private Object[] array;
-    private static final int DEFAULT_CAPACITY = 20;
-    private static final Object[] EMPTY_ARRAY = {};
+    private int DEFAULT_CAPACITY = 20;
 
     public ArrayImpl(int capacity) {
-        if (capacity > 0) {
         this.array = new Object[capacity];
-        } else if (capacity == 0) {
-            this.array = EMPTY_ARRAY;
-        } else {
-            throw new IllegalArgumentException("Illegal capacity: " + capacity);
-        }
     }
 
     public ArrayImpl() {
@@ -23,9 +16,7 @@ public class ArrayImpl implements Array {
 
     @Override
     public void clear() {
-        for (int i = 0; i < array.length; i++) {
-            array[i] = null;
-        }
+        array = new Object[0];
     }
 
     @Override
@@ -43,24 +34,38 @@ public class ArrayImpl implements Array {
 
         @Override
         public boolean hasNext() {
-            return cursor != array.length;
+            if (cursor > array.length - 1) {
+                return false;
+            } else {
+                return array[cursor] != null;
+            }
         }
 
         @Override
         public Object next() {
-            return null;
+            if (!hasNext()) {
+                return null;
+            } else {
+                return array[cursor++];
+            }
+        }
+
+        @Override
+        public void remove() {
+            ArrayImpl.this.remove(cursor - 1);
+            cursor = 0;
         }
 
     }
 
     @Override
     public void add(Object element) {
-        Object[] addArray = new Object[array.length+1];
+        Object[] temp = new Object[array.length + 1];
         for (int i = 0; i < array.length; i++) {
-                addArray[i] = array[i];
+            temp[i] = array[i];
         }
-        addArray[addArray.length-1] = element;
-        array = addArray;
+        temp[temp.length - 1] = element;
+        array = temp;
     }
 
     @Override
@@ -93,31 +98,43 @@ public class ArrayImpl implements Array {
 
     @Override
     public void remove(int index) {
-        Object[] anotherArray = new Object[array.length - 1];
+        Object[] temp = new Object[array.length - 1];
         for (int i = 0, k = 0; i < array.length; i++) {
             if (i == index) {
                 continue;
             } else {
-                anotherArray[k++] = array[i];
+                temp[k++] = array[i];
             }
         }
+        array = temp;
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder("[");
-        for (int i = 0; i < array.length; i++) {
-            if (i < array.length) {
-                str.append(array[i]);
-            } else {
-                str.append(array[i] + "]");
+        if (array.length != 0) {
+            for (int i = 0; i < array.length; i++) {
+                if (i < array.length - 1) {
+                    str.append(array[i]).append(", ");
+                } else {
+                    str.append(array[array.length - 1]).append("]");
+                }
             }
+        } else {
+            str.append(" ]");
         }
-        return null;
+        return str.toString();
+    }
+
+    public static void print(Object objToPrint) {
+        System.out.println(objToPrint);
     }
 
     public static void main(String[] args) {
-        
+        ArrayImpl arr = new ArrayImpl(0);
+        arr.add("A");
+        arr.add("B");
+        print(arr);
     }
 
 }
