@@ -7,7 +7,7 @@ public class ArrayImpl implements Array {
     private int DEFAULT_CAPACITY = 20;
 
     public ArrayImpl(int capacity) {
-        this.array = new Object[capacity - 4];
+        this.array = new Object[capacity];
     }
 
     public ArrayImpl() {
@@ -131,7 +131,7 @@ public class ArrayImpl implements Array {
     }
 
     public static void main(String[] args) {
-        ArrayImpl arr = new ArrayImpl(4);
+        ArrayImpl arr = new ArrayImpl();
         arr.add("A");
         arr.add("B");
         print(arr);
