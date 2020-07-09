@@ -36,11 +36,12 @@ public class ArrayImpl implements Array {
 
         @Override
         public boolean hasNext() {
-            if (cursor > nElements - 1) {
-                return false;
-            } else {
-                return array[cursor] != null;
-            }
+//            if (cursor > nElements - 1) {
+//                return false;
+//            } else {
+//                return array[cursor] != null;
+//            }
+            return cursor != nElements;
         }
 
         @Override
