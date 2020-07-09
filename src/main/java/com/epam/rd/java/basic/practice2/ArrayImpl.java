@@ -18,6 +18,7 @@ public class ArrayImpl implements Array {
     @Override
     public void clear() {
         array = new Object[0];
+        nElements = 0;
     }
 
     @Override
@@ -110,6 +111,7 @@ public class ArrayImpl implements Array {
             }
         }
         array = temp;
+        nElements--;
     }
 
     @Override
