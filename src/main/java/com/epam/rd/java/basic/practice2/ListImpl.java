@@ -43,8 +43,8 @@ public class ListImpl implements List {
     }
 
     private class IteratorImpl implements Iterator<Object> {
-        private int nextIndex;
-        private Node<Object> next;
+        private int nextIndex = 0;
+        private Node<Object> next = first;
 
 
         @Override
@@ -132,7 +132,6 @@ public class ListImpl implements List {
     public Object getFirst() {
         final Node<Object> f = first;
         if (f == null) {
-//            throw new NoSuchElementException();
             return null;
         }
         return f.item;
@@ -142,7 +141,6 @@ public class ListImpl implements List {
     public Object getLast() {
         final Node<Object> l = last;
         if (l == null) {
-//            throw new NoSuchElementException();
             return null;
         }
         return l.item;
@@ -240,7 +238,16 @@ public class ListImpl implements List {
 
     public static void main(String[] args) {
 // just my empty main method
-
+        ListImpl test = new ListImpl();
+        test.addLast("A");
+        test.addLast("B");
+        test.addLast("C");
+        test.addLast("D");
+        test.addLast("E");
+        test.addLast(null);
+        for (Object s : test) {
+            System.out.println(s);
+        }
     }
 
 }
