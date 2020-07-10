@@ -164,7 +164,6 @@ public class ListImpl implements List {
         if (element == null) {
             for (Node<Object> x = first; x != null; x = x.next) {
                 if (x.item == null) {
-//                    unlink (x);
                     if (first.equals(x.item)) {
                         removeFirst();
                         size--;
