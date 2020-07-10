@@ -133,10 +133,7 @@ public class ArrayImpl implements Array {
 
     @SuppressWarnings("all")
     public static void main(String[] args) {
-        ArrayImpl arr = new ArrayImpl(5);
-        arr.add("A");
-        arr.add("B");
-        Demo.print(arr);
+
 
     }
 

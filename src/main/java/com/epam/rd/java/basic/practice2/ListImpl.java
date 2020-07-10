@@ -105,7 +105,7 @@ public class ListImpl implements List {
         } else {
             next.prev = null;
         }
-        size --;
+        size--;
     }
 
     @Override
@@ -146,8 +146,22 @@ public class ListImpl implements List {
 
     @Override
     public Object search(Object element) {
+        if (element == null) {
+            for (Node<Object> x = first; x != null; x = x.next) {
+                if (x.item == null) {
+                    return null;
+                }
+            }
+        } else {
+            for (Node<Object> x = first; x != null; x = x.next) {
+                if (x.item == element) {
+                    return element;
+                }
+            }
+        }
         return null;
     }
+
 
     @Override
     public boolean remove(Object element) {
@@ -162,4 +176,5 @@ public class ListImpl implements List {
     public static void main(String[] args) {
 
     }
+
 }
