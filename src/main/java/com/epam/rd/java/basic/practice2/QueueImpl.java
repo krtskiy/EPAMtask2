@@ -67,6 +67,7 @@ public class QueueImpl implements Queue  {
     @Override
     public Object dequeue(){
         Object test = arr[0];
+        if (scale > 0) {
         Object[] temp = new Object[scale - 1];
         for (int i = 0, k = 0; i < scale; i++) {
             if (i == 0) {
@@ -77,6 +78,9 @@ public class QueueImpl implements Queue  {
         }
         arr = temp;
         scale--;
+        } else {
+            return null;
+        }
         return test;
     }
 
@@ -104,7 +108,14 @@ public class QueueImpl implements Queue  {
 
     public static void main(String[] args) {
 // just my empty method
-
+        QueueImpl test = new QueueImpl(5);
+        test.enqueue("A");
+        test.enqueue("B");
+        test.enqueue("C");
+        test.enqueue("D");
+        System.out.println(test);
+        test.clear();
+        System.out.println(test);
     }
 
 }
