@@ -87,7 +87,10 @@ public class QueueImpl implements Queue  {
 
     @Override
     public Object top() {
-        return arr[0];
+        if (scale > 0) {
+            return arr[0];
+        }
+        return null;
     }
 
     @Override
@@ -109,7 +112,7 @@ public class QueueImpl implements Queue  {
 
     public static void main(String[] args) {
 // just my empty method
-        
+       
     }
 
 }
