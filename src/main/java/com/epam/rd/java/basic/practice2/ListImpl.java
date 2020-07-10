@@ -48,7 +48,7 @@ public class ListImpl implements List {
 
         @Override
         public Object next() {
-        Node<Object> lastReturned;
+            Node<Object> lastReturned;
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
@@ -164,17 +164,30 @@ public class ListImpl implements List {
         if (element == null) {
             for (Node<Object> x = first; x != null; x = x.next) {
                 if (x.item == null) {
-                    if (first.equals(x.item)) {
+                    if (first == x.item) {
                         removeFirst();
                         size--;
-                    } else if (last.equals(x.item)) {
+                    } else if (last == x.item) {
                         removeLast();
                         size--;
                     } else {
                         final Node<Object> next = x.next;
                         final Node<Object> prev = x.prev;
-                        prev.next = next;
-                        next.prev = prev;
+                        if (prev == null) {
+                            first = next;
+                        } else {
+                            prev.next = next;
+                            x.prev = null;
+                        }
+
+                        if (next == null) {
+                            last = prev;
+                        } else {
+                            next.prev = prev;
+                            x.next = null;
+                        }
+
+                        x.item = null;
                         size--;
                     }
                     return true;
@@ -182,20 +195,30 @@ public class ListImpl implements List {
             }
         } else {
             for (Node<Object> x = first; x != null; x = x.next) {
-                if (element.equals(x.item)) {
-                    if (last.equals(x.item)) {
-                        removeLast();
-                        size--;
-                    } else if (first.equals(x.item)) {
+                if (x.item == element) {
+                    if (x.item.equals(first)) {
                         removeFirst();
+                        size--;
+                    } else if (x.item.equals(last)) {
+                        removeLast();
                         size--;
                     } else {
                         final Node<Object> next = x.next;
                         final Node<Object> prev = x.prev;
-                        prev.next = next;
-                        x.prev = null;
-                        next.prev = prev;
-                        x.next = null;
+                        if (prev == null) {
+                            first = next;
+                        } else {
+                            prev.next = next;
+                            x.prev = null;
+                        }
+
+                        if (next == null) {
+                            last = prev;
+                        } else {
+                            next.prev = prev;
+                            x.next = null;
+                        }
+
                         x.item = null;
                         size--;
                     }
