@@ -65,13 +65,24 @@ public class QueueImpl implements Queue  {
     }
 
     @Override
-    public Object dequeue() {
-        return null;
+    public Object dequeue(){
+        Object test = arr[0];
+        Object[] temp = new Object[scale - 1];
+        for (int i = 0, k = 0; i < scale; i++) {
+            if (i == 0) {
+                continue;
+            } else {
+                temp[k++] = arr[i];
+            }
+        }
+        arr = temp;
+        scale--;
+        return test;
     }
 
     @Override
     public Object top() {
-        return null;
+        return arr[0];
     }
 
     @Override
@@ -92,6 +103,7 @@ public class QueueImpl implements Queue  {
     }
 
     public static void main(String[] args) {
+// just my empty method
 
     }
 
