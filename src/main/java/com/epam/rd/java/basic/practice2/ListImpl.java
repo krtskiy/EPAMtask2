@@ -22,12 +22,8 @@ public class ListImpl implements List {
 
     @Override
     public void clear() {
-        Node<Object> f = first;
-        Node<Object> l = last;
         first = null;
-        f.next = null;
         last = null;
-        l.prev = null;
         size = 0;
     }
 
@@ -170,11 +166,26 @@ public class ListImpl implements List {
 
     @Override
     public String toString() {
-        return null;
+        StringBuilder str = new StringBuilder("[");
+        if (size != 0) {
+            for (Node<Object> x = first; x != null; x = x.next) {
+                if (x != last) {
+                    str.append(x.item).append(", ");
+                } else {
+                    str.append(x.item).append("]");
+                }
+            }
+        }
+        return str.toString();
     }
 
     public static void main(String[] args) {
-
+        ListImpl test = new ListImpl();
+        test.addFirst("A");
+        test.addLast("B");
+        test.addLast("C");
+        test.addLast(null);
+        System.out.println(test);
     }
 
 }
