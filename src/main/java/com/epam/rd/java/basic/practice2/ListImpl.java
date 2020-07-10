@@ -38,7 +38,6 @@ public class ListImpl implements List {
 
     private class IteratorImpl implements Iterator<Object> {
         private int nextIndex;
-        private Node<Object> lastReturned;
         private Node<Object> next;
 
 
@@ -49,6 +48,7 @@ public class ListImpl implements List {
 
         @Override
         public Object next() {
+        Node<Object> lastReturned;
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
@@ -161,6 +161,23 @@ public class ListImpl implements List {
 
     @Override
     public boolean remove(Object element) {
+        if (element == null) {
+            for (Node<Object> x = first; x != null; x = x.next) {
+                if (x.item == null) {
+//                    unlink (x);
+
+                    return true;
+                }
+            }
+        } else {
+            for (Node<Object> x = first; x != null; x = x.next) {
+                if (element.equals(x.item)) {
+//                    unlink (x);
+
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -175,17 +192,15 @@ public class ListImpl implements List {
                     str.append(x.item).append("]");
                 }
             }
+        } else {
+            str.append(" ]");
         }
         return str.toString();
     }
 
     public static void main(String[] args) {
-        ListImpl test = new ListImpl();
-        test.addFirst("A");
-        test.addLast("B");
-        test.addLast("C");
-        test.addLast(null);
-        System.out.println(test);
+// just my empty main method
+
     }
 
 }
