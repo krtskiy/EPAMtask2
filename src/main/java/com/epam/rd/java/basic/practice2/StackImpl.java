@@ -125,14 +125,7 @@ public class StackImpl implements Stack {
 
     public static void main(String[] args) {
 // just my empty main method
-        StackImpl test = new StackImpl();
-        test.push("A");
-        test.push("B");
-        test.push("C");
-        test.push(null);
-        System.out.println(test.top());
-        System.out.println(test.pop());
-
+        
     }
 
 }
