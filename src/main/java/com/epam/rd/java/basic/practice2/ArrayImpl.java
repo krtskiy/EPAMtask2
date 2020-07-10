@@ -131,7 +131,6 @@ public class ArrayImpl implements Array {
         return str.toString();
     }
 
-    @SuppressWarnings("all")
     public static void main(String[] args) {
 
 
