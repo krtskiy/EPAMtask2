@@ -124,6 +124,7 @@ public class StackImpl implements Stack {
     }
 
     public static void main(String[] args) {
+// just my empty main method
 
     }
 
