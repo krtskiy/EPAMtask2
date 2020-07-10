@@ -22,8 +22,14 @@ public class ListImpl implements List {
 
     @Override
     public void clear() {
-        first = null;
-        last = null;
+        for (Node<Object> x = first; x != null; ) {
+            Node<Object> next = x.next;
+            x.item = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        first = last = null;
         size = 0;
     }
 
@@ -126,7 +132,8 @@ public class ListImpl implements List {
     public Object getFirst() {
         final Node<Object> f = first;
         if (f == null) {
-            throw new NoSuchElementException();
+//            throw new NoSuchElementException();
+            return null;
         }
         return f.item;
     }
@@ -135,7 +142,8 @@ public class ListImpl implements List {
     public Object getLast() {
         final Node<Object> l = last;
         if (l == null) {
-            throw new NoSuchElementException();
+//            throw new NoSuchElementException();
+            return null;
         }
         return l.item;
     }
@@ -164,13 +172,6 @@ public class ListImpl implements List {
         if (element == null) {
             for (Node<Object> x = first; x != null; x = x.next) {
                 if (x.item == null) {
-                    if (first == x.item) {
-                        removeFirst();
-                        size--;
-                    } else if (last == x.item) {
-                        removeLast();
-                        size--;
-                    } else {
                         final Node<Object> next = x.next;
                         final Node<Object> prev = x.prev;
                         if (prev == null) {
@@ -189,20 +190,12 @@ public class ListImpl implements List {
 
                         x.item = null;
                         size--;
-                    }
                     return true;
                 }
             }
         } else {
             for (Node<Object> x = first; x != null; x = x.next) {
                 if (x.item == element) {
-                    if (x.item.equals(first)) {
-                        removeFirst();
-                        size--;
-                    } else if (x.item.equals(last)) {
-                        removeLast();
-                        size--;
-                    } else {
                         final Node<Object> next = x.next;
                         final Node<Object> prev = x.prev;
                         if (prev == null) {
@@ -221,7 +214,6 @@ public class ListImpl implements List {
 
                         x.item = null;
                         size--;
-                    }
                     return true;
                 }
             }
@@ -248,7 +240,7 @@ public class ListImpl implements List {
 
     public static void main(String[] args) {
 // just my empty main method
-        
+
     }
 
 }
