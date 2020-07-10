@@ -225,15 +225,7 @@ public class ListImpl implements List {
 
     public static void main(String[] args) {
 // just my empty main method
-        ListImpl test = new ListImpl();
-        test.addFirst("A");
-        test.addLast("B");
-        test.addLast(null);
-        test.addLast("D");
-        test.addLast("E");
-        test.remove(null);
-        System.out.println(test);
-        System.out.println(test.size());
+        
     }
 
 }
