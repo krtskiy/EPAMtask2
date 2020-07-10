@@ -150,7 +150,7 @@ public class ListImpl implements List {
             }
         } else {
             for (Node<Object> x = first; x != null; x = x.next) {
-                if (x.item == element) {
+                if (element.equals(x.item)) {
                     return element;
                 }
             }
@@ -165,15 +165,41 @@ public class ListImpl implements List {
             for (Node<Object> x = first; x != null; x = x.next) {
                 if (x.item == null) {
 //                    unlink (x);
-
+                    if (first.equals(x.item)) {
+                        removeFirst();
+                        size--;
+                    } else if (last.equals(x.item)) {
+                        removeLast();
+                        size--;
+                    } else {
+                        final Node<Object> next = x.next;
+                        final Node<Object> prev = x.prev;
+                        prev.next = next;
+                        next.prev = prev;
+                        size--;
+                    }
                     return true;
                 }
             }
         } else {
             for (Node<Object> x = first; x != null; x = x.next) {
                 if (element.equals(x.item)) {
-//                    unlink (x);
-
+                    if (last.equals(x.item)) {
+                        removeLast();
+                        size--;
+                    } else if (first.equals(x.item)) {
+                        removeFirst();
+                        size--;
+                    } else {
+                        final Node<Object> next = x.next;
+                        final Node<Object> prev = x.prev;
+                        prev.next = next;
+                        x.prev = null;
+                        next.prev = prev;
+                        x.next = null;
+                        x.item = null;
+                        size--;
+                    }
                     return true;
                 }
             }
@@ -200,7 +226,15 @@ public class ListImpl implements List {
 
     public static void main(String[] args) {
 // just my empty main method
-
+        ListImpl test = new ListImpl();
+        test.addFirst("A");
+        test.addLast("B");
+        test.addLast(null);
+        test.addLast("D");
+        test.addLast("E");
+        test.remove(null);
+        System.out.println(test);
+        System.out.println(test.size());
     }
 
 }
