@@ -6,14 +6,14 @@ import java.util.NoSuchElementException;
 public class ArrayImpl implements Array {
     private Object[] array;
     private int size = 0;
-    private int defaultCapacity = 10;
+    private int defCap = 10;
 
     public ArrayImpl(int capacity) {
         this.array = new Object[capacity];
     }
 
     public ArrayImpl() {
-        this.array = new Object[defaultCapacity];
+        this.array = new Object[defCap];
     }
 
     @Override

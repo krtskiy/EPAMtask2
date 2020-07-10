@@ -4,27 +4,27 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class QueueImpl implements Queue  {
-    private Object[] arr;
-    int scale = 0;
+    private Object[] arrayQueue;
+    int size = 0;
     private int defCap = 10;
 
     public QueueImpl(int cap) {
-        this.arr = new Object[cap];
+        this.arrayQueue = new Object[cap];
     }
 
     public QueueImpl() {
-        this.arr = new Object[defCap];
+        this.arrayQueue = new Object[defCap];
     }
 
     @Override
     public void clear() {
-        arr = new Object[0];
-        scale = 0;
+        arrayQueue = new Object[0];
+        size = 0;
     }
 
     @Override
     public int size() {
-        return scale;
+        return size;
     }
 
     public Iterator<Object> iterator() {
@@ -36,18 +36,18 @@ public class QueueImpl implements Queue  {
 
         @Override
         public boolean hasNext() {
-            return index != scale;
+            return index != size;
         }
 
         @Override
         public Object next(){
-            if (index > scale) {
+            if (index > size) {
                 throw new NoSuchElementException();
             }
             if (!hasNext()) {
                 return null;
             } else {
-                return arr[index++];
+                return arrayQueue[index++];
             }
         }
 
@@ -55,30 +55,30 @@ public class QueueImpl implements Queue  {
 
     @Override
     public void enqueue(Object element) {
-        Object[] temporary = new Object[scale + 1];
-        for (int i = 0; i < scale; i++) {
-            temporary[i] = arr[i];
+        Object[] temporary = new Object[size + 1];
+        for (int i = 0; i < size; i++) {
+            temporary[i] = arrayQueue[i];
         }
         temporary[temporary.length - 1] = element;
-        arr = temporary;
-        scale++;
+        arrayQueue = temporary;
+        size++;
     }
 
     @Override
     public Object dequeue(){
         Object test = null;
-        if (scale > 0) {
-        test = arr[0];
-        Object[] temp = new Object[scale - 1];
-        for (int i = 0, k = 0; i < scale; i++) {
+        if (size > 0) {
+        test = arrayQueue[0];
+        Object[] temp = new Object[size - 1];
+        for (int i = 0, k = 0; i < size; i++) {
             if (i == 0) {
                 continue;
             } else {
-                temp[k++] = arr[i];
+                temp[k++] = arrayQueue[i];
             }
         }
-        arr = temp;
-        scale--;
+        arrayQueue = temp;
+        size--;
         } else {
             return null;
         }
@@ -87,8 +87,8 @@ public class QueueImpl implements Queue  {
 
     @Override
     public Object top() {
-        if (scale > 0) {
-            return arr[0];
+        if (size > 0) {
+            return arrayQueue[0];
         }
         return null;
     }
@@ -96,12 +96,12 @@ public class QueueImpl implements Queue  {
     @Override
     public String toString(){
         StringBuilder strBldr = new StringBuilder("[");
-        if (scale != 0) {
-            for (int i = 0; i < scale; i++) {
-                if (i < scale - 1) {
-                    strBldr.append(arr[i]).append(", ");
+        if (size != 0) {
+            for (int i = 0; i < size; i++) {
+                if (i < size - 1) {
+                    strBldr.append(arrayQueue[i]).append(", ");
                 } else {
-                    strBldr.append(arr[scale - 1]).append("]");
+                    strBldr.append(arrayQueue[size - 1]).append("]");
                 }
             }
         } else {
@@ -112,7 +112,7 @@ public class QueueImpl implements Queue  {
 
     public static void main(String[] args) {
 // just my empty method
-       
+
     }
 
 }
