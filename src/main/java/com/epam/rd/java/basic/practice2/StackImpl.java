@@ -87,23 +87,11 @@ public class StackImpl implements Stack {
 
     @Override
     public Object top(){
-        Object test = null;
-        if (size > 0) {
-            test = arrayStack[size - 1];
-            Object[] temp = new Object[size - 1];
-            for (int i = 0, k = 0; i < size; i++) {
-                if (i == 0) {
-                    continue;
-                } else {
-                    temp[k++] = arrayStack[i];
-                }
-            }
-            arrayStack = temp;
-            size--;
-        } else {
-            return null;
-        }
-        return test;
+       if (size > 0) {
+           return arrayStack[size - 1];
+       } else {
+           return null;
+       }
     }
 
     @Override
