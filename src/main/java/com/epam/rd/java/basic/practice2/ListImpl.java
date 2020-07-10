@@ -8,7 +8,7 @@ public class ListImpl implements List {
     Node<Object> first;
     Node<Object> last;
 
-    private static class Node<Objeect> {
+    private static class Node<Object> {
         Object item;
         Node<Object> next;
         Node<Object> prev;
@@ -22,7 +22,13 @@ public class ListImpl implements List {
 
     @Override
     public void clear() {
-        
+        Node<Object> f = first;
+        Node<Object> l = last;
+        first = null;
+        f.next = null;
+        last = null;
+        l.prev = null;
+        size = 0;
     }
 
     @Override
