@@ -32,11 +32,11 @@ public class StackImpl implements Stack {
     }
 
     private class IteratorImpl implements Iterator<Object> {
-        int cursor;
+        int cursor = size - 1;
 
         @Override
         public boolean hasNext() {
-            return cursor != size;
+            return cursor >= 0;
         }
 
         @Override
@@ -47,7 +47,7 @@ public class StackImpl implements Stack {
             if (!hasNext()) {
                 return null;
             } else {
-                return arrayStack[cursor++];
+                return arrayStack[cursor--];
             }
         }
 
