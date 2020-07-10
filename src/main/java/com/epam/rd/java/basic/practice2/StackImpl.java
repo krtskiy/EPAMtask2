@@ -68,7 +68,7 @@ public class StackImpl implements Stack {
     public Object pop(){
         Object test = null;
         if (size > 0) {
-            test = arrayStack[0];
+            test = arrayStack[size - 1];
             Object[] temp = new Object[size - 1];
             for (int i = 0, k = 0; i < size; i++) {
                 if (i == 0) {
@@ -89,7 +89,7 @@ public class StackImpl implements Stack {
     public Object top(){
         Object test = null;
         if (size > 0) {
-            test = arrayStack[0];
+            test = arrayStack[size - 1];
             Object[] temp = new Object[size - 1];
             for (int i = 0, k = 0; i < size; i++) {
                 if (i == 0) {
@@ -125,6 +125,13 @@ public class StackImpl implements Stack {
 
     public static void main(String[] args) {
 // just my empty main method
+        StackImpl test = new StackImpl();
+        test.push("A");
+        test.push("B");
+        test.push("C");
+        test.push(null);
+        System.out.println(test.top());
+        System.out.println(test.pop());
 
     }
 
