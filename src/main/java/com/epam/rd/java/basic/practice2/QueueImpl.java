@@ -70,11 +70,9 @@ public class QueueImpl implements Queue  {
         if (size > 0) {
         test = arrayQueue[0];
         Object[] temp = new Object[size - 1];
-        for (int i = 0, k = 0; i < size; i++) {
-            if (i == 0) {
-                continue;
-            } else {
-                temp[k++] = arrayQueue[i];
+        for (int i = 0, k = 0; i < size; i++, k++) {
+            if (i != 0) {
+                temp[k] = arrayQueue[i];
             }
         }
         arrayQueue = temp;

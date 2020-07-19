@@ -8,12 +8,12 @@ public class ListImpl implements List {
     Node<Object> first;
     Node<Object> last;
 
-    private static class Node<Object> {
-        Object item;
-        Node<Object> next;
-        Node<Object> prev;
+    private static class Node<O> {
+        O item;
+        Node<O> next;
+        Node<O> prev;
 
-        public Node(Node<Object> prev, Object element, Node<Object> next) {
+        public Node(Node<O> prev, O element, Node<O> next) {
             this.item = element;
             this.next = next;
             this.prev = prev;

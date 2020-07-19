@@ -103,11 +103,9 @@ public class ArrayImpl implements Array {
     @Override
     public void remove(int index) {
         Object[] temp = new Object[size - 1];
-        for (int i = 0, k = 0; i < size; i++) {
-            if (i == index) {
-                continue;
-            } else {
-                temp[k++] = array[i];
+        for (int i = 0, k = 0; i < size; i++, k++) {
+            if (i != index) {
+                temp[k] = array[i];
             }
         }
         array = temp;

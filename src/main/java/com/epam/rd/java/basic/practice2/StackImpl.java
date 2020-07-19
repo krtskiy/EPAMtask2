@@ -40,7 +40,7 @@ public class StackImpl implements Stack {
         }
 
         @Override
-        public Object next(){
+        public Object next() {
             if (cursor > size) {
                 throw new NoSuchElementException();
             }
@@ -65,17 +65,13 @@ public class StackImpl implements Stack {
     }
 
     @Override
-    public Object pop(){
+    public Object pop() {
         Object test = null;
         if (size > 0) {
             test = arrayStack[size - 1];
             Object[] temp = new Object[size - 1];
-            for (int i = 0, k = 0; i < size; i++) {
-                if (i == 0) {
-                    continue;
-                } else {
-                    temp[k++] = arrayStack[i];
-                }
+            for (int i = 1, k = 0; i < size; i++, k++) {
+                temp[k] = arrayStack[i];
             }
             arrayStack = temp;
             size--;
@@ -86,16 +82,16 @@ public class StackImpl implements Stack {
     }
 
     @Override
-    public Object top(){
-       if (size > 0) {
-           return arrayStack[size - 1];
-       } else {
-           return null;
-       }
+    public Object top() {
+        if (size > 0) {
+            return arrayStack[size - 1];
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder str = new StringBuilder("[");
         if (size != 0) {
             for (int i = 0; i < size; i++) {
