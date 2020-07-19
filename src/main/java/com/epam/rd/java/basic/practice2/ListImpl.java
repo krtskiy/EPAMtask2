@@ -20,7 +20,6 @@ public class ListImpl implements List {
         }
     }
 
-    @SuppressWarnings("all")
     @Override
     public void clear() {
         for (Node<Object> x = first; x != null; ) {
