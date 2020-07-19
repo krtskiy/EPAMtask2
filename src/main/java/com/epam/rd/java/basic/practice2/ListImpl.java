@@ -27,7 +27,7 @@ public class ListImpl implements List {
             x.item = null;
             x.next = null;
             x.prev = null;
-            x = next;
+            x = next; //NOSONAR
         }
         first = last = null;
         size = 0;
